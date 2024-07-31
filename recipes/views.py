@@ -1,86 +1,104 @@
-from django.shortcuts import render, get_object_or_404
-from .models import Recipe
+from django.shortcuts import render, redirect
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login
+from django.contrib.auth.decorators import login_required  # Add this line
 
-def index(request):
+def home(request):
     """
-    Display the home page with a list of all recipes.
+    Render the home page.
 
     Args:
-        request (HttpRequest): The request object.
+        request: The HTTP request object.
 
     Returns:
-        HttpResponse: The response object containing the rendered template.
+        HttpResponse: The rendered HTML template for the home page.
     """
-    recipes = Recipe.objects.all()
-    return render(request, 'recipes/index.html', {'recipes': recipes})
+    return render(request, 'home.html')
 
-def detail(request, recipe_id):
+@login_required
+def profile(request):
     """
-    Display the detail page for a specific recipe.
+    Render the user's profile page.
 
     Args:
-        request (HttpRequest): The request object.
-        recipe_id (int): The ID of the recipe.
+        request: The HTTP request object.
 
     Returns:
-        HttpResponse: The response object containing the rendered template.
+        HttpResponse: The rendered HTML template for the user's profile page.
     """
-    recipe = get_object_or_404(Recipe, pk=recipe_id)
-    return render(request, 'recipes/detail.html', {'recipe': recipe})
+    return render(request, 'profile.html')
 
-def add_recipe(request):
+@login_required
+def chocolate_cake(request):
     """
-    Display the form to add a new recipe and handle the form submission.
+    Render the chocolate cake recipe page.
 
     Args:
-        request (HttpRequest): The request object.
+        request: The HTTP request object.
 
     Returns:
-        HttpResponse: The response object containing the rendered template or
-        a redirect to the index page upon successful form submission.
+        HttpResponse: The rendered HTML template for the chocolate cake recipe page.
+    """
+    return render(request, 'chocolate_cake.html')
+
+@login_required
+def cakes(request):
+    """
+    Render the cakes page with a list of available cake recipes.
+
+    Args:
+        request: The HTTP request object.
+
+    Returns:
+        HttpResponse: The rendered HTML template for the cakes page.
+    """
+    return render(request, 'cakes.html')
+
+@login_required
+def cheesecake(request):
+    """
+    Render the cheesecake recipe page.
+
+    Args:
+        request: The HTTP request object.
+
+    Returns:
+        HttpResponse: The rendered HTML template for the cheesecake recipe page.
+    """
+    return render(request, 'cheesecake.html')
+
+@login_required
+def vanilla_cake(request):
+    """
+    Render the vanilla cake recipe page.
+
+    Args:
+        request: The HTTP request object.
+
+    Returns:
+        HttpResponse: The rendered HTML template for the vanilla cake recipe page.
+    """
+    return render(request, 'vanilla_cake.html')
+
+def register(request):
+    """
+    Handle user registration and login.
+
+    If the request method is POST, process the registration form and log in the new user.
+    If the request method is GET, display the registration form.
+
+    Args:
+        request: The HTTP request object.
+
+    Returns:
+        HttpResponse: The rendered HTML template for the registration page.
     """
     if request.method == 'POST':
-        form = RecipeForm(request.POST)
+        form = UserCreationForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect('index')
+            user = form.save()
+            login(request, user)
+            return redirect('home')
     else:
-        form = RecipeForm()
-    return render(request, 'recipes/add_recipe.html', {'form': form})
-
-def edit_recipe(request, recipe_id):
-    """
-    Display the form to edit an existing recipe and handle the form submission.
-
-    Args:
-        request (HttpRequest): The request object.
-        recipe_id (int): The ID of the recipe to edit.
-
-    Returns:
-        HttpResponse: The response object containing the rendered template or
-        a redirect to the detail page upon successful form submission.
-    """
-    recipe = get_object_or_404(Recipe, pk=recipe_id)
-    if request.method == 'POST':
-        form = RecipeForm(request.POST, instance=recipe)
-        if form.is_valid():
-            form.save()
-            return redirect('detail', recipe_id=recipe.id)
-    else:
-        form = RecipeForm(instance=recipe)
-    return render(request, 'recipes/edit_recipe.html', {'form': form})
-
-def delete_recipe(request, recipe_id):
-    """
-    Delete an existing recipe.
-
-    Args:
-        request (HttpRequest): The request object.
-        recipe_id (int): The ID of the recipe to delete.
-
-    Returns:
-        HttpResponse: A redirect to the index page after deletion.
-    """
-    recipe = get_object_or_404(Recipe, pk=recipe_id)
-    recipe.delete()
-    return redirect('index')
+        form = UserCreationForm()
+    return render(request, 'register.html', {'form': form})
