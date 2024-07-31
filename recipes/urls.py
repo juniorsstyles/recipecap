@@ -10,3 +10,18 @@ urlpatterns = [
     path('register/', views.register, name='register'),
     path('profile/', views.profile, name='profile'),
 ]
+
+"""
+URL patterns for the recipes app.
+
+This module defines the URL patterns for the recipes app, mapping URLs to views.
+
+Paths:
+    '' (home): The home page view.
+    'cakes/' (cakes): The cakes list view.
+    'chocolate_cake/' (chocolate_cake): The chocolate cake detail view.
+    'cheesecake/' (cheesecake): The cheesecake detail view.
+    'vanilla_cake/' (vanilla_cake): The vanilla cake detail view.
+    'register/' (register): The user registration view.
+    'profile/' (profile): The user profile view.
+"""
