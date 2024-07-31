@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="jumbotron text-center bg-primary text-white">
+    <h1 class="display-4">Welcome to Cake Recipe Site!</h1>
+    <p class="lead">Discover and enjoy our secret cake recipes. Login to get started.</p>
+    <a class="btn btn-light btn-lg" href="{% url 'login' %}" role="button">Login</a>
+    <a class="btn btn-light btn-lg" href="{% url 'register' %}" role="button">Register</a>
+</div>
+{% endblock %}

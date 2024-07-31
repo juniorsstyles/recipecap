@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="text-center mb-4">Welcome, {{ user.username }}!</h1>
+    <p>Choose a cake recipe to view:</p>
+    <ul class="list-group">
+        <li class="list-group-item">
+            <a href="{% url 'chocolate_cake' %}">Chocolate Cake</a>
+        </li>
+        <li class="list-group-item">
+            <a href="{% url 'cheesecake' %}">Cheesecake</a>
+        </li>
+        <li class="list-group-item">
+            <a href="{% url 'vanilla_cake' %}">Vanilla Cake</a>
+        </li>
+    </ul>
+</div>
+{% endblock %}

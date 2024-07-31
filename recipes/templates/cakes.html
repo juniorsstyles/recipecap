@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}Select a Cake{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="text-center mb-4">Choose Your Cake Recipe</h1>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card mb-4 shadow-sm">
+                <img src="https://via.placeholder.com/350x200?text=Chocolate+Cake" class="card-img-top" alt="Chocolate Cake">
+                <div class="card-body">
+                    <h5 class="card-title">Chocolate Cake</h5>
+                    <p class="card-text">A rich and moist chocolate cake that's perfect for any occasion.</p>
+                    <a href="{% url 'chocolate_cake' %}" class="btn btn-primary">View Recipe</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card mb-4 shadow-sm">
+                <img src="https://via.placeholder.com/350x200?text=Cheesecake" class="card-img-top" alt="Cheesecake">
+                <div class="card-body">
+                    <h5 class="card-title">Cheesecake</h5>
+                    <p class="card-text">A creamy and delicious cheesecake with a buttery crust.</p>
+                    <a href="{% url 'cheesecake' %}" class="btn btn-primary">View Recipe</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card mb-4 shadow-sm">
+                <img src="https://via.placeholder.com/350x200?text=Vanilla+Cake" class="card-img-top" alt="Vanilla Cake">
+                <div class="card-body">
+                    <h5 class="card-title">Vanilla Cake</h5>
+                    <p class="card-text">A classic vanilla cake that's light and fluffy.</p>
+                    <a href="{% url 'vanilla_cake' %}" class="btn btn-primary">View Recipe</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
